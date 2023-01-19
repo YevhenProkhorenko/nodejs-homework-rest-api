@@ -19,6 +19,12 @@ router.post(
   cntrlWrapper(cntrl.login)
 );
 router.get("/current", authenticate, cntrlWrapper(cntrl.getCurrent));
+router.get("/verify/:verificationCode", cntrlWrapper(cntrl.verifyUser));
+router.post(
+  "/verify",
+  validateBody(schemas.emailSchema),
+  cntrlWrapper(cntrl.resendVerifyEmail)
+);
 router.post("/logout", authenticate, cntrlWrapper(cntrl.logoutUser));
 router.patch("/users", authenticate, cntrlWrapper(cntrl.subscriptionUpdate));
 router.patch(
